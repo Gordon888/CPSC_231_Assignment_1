@@ -1,0 +1,149 @@
+
+"""
+{ CPSC 231 - Assignment - 1 }
+
+Global Criterias:
+- We are not permitted to import anything for this assignment
+
+- Invalid inputs must be indicated with "Invalid Input",
+followed by the program exiting.
+
+- Age is within the paramaters of 1900 - 2024
+- User must be 18 years of age from the date of the
+assignements due date (September 27th, 2024)
+- We must account for leap years.
+
+- User that inputs 'No', or 'no' for question 1 or 2, 
+they are not eligible to vote.
+
+"""
+
+# Fuction to check leap years.
+def Is_Leap_Year(year):
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+# Main function to check voting eligibiility.
+def Voting_Eligibility ():
+    
+    # Step 1: Ask the User if they're a Canadian Citizen.
+    Citizenship = str(input('Are you a Canadian citizen? (Yes or No): '))
+    Valid_Citizenship = False
+
+    if Citizenship == "yes" or Citizenship == "Yes":
+        Valid_Citizenship = True
+
+    elif Citizenship == "no" or Citizenship == "No":
+        Valid_Citizenship = False
+
+    else:
+        print('Invalid response.')
+        return
+
+    # Step 2: Ask the User if they're a resident of Alberta.
+    Residence = str(input('Are you a resident of Alberta? (Yes or No): '))
+    Valid_Residence = False
+
+    if Residence == "yes" or Residence == "Yes":
+        Valid_Residence = True
+        
+    elif Residence == "no" or Residence == "No":
+        Valid_Residence = False
+    
+    else:
+        print('Invalid response.')
+        return
+    
+    # Step 3: Ask the User for their birth month.
+    Birth_Month = str(input('What is the month of your birth date? (Ex. May): '))
+    Valid_Months = ("January", "February", "March", "April", "May", "June", "July",
+                    "August", "September", "October", "November", "December")
+
+    if Birth_Month not in Valid_Months:
+        print('Invalid Response')
+        return
+    
+    #Step 4: If the user answers with a valid birth month, proceed with question 4) What is the Users day of birth?
+    Birth_Day = input('What is the day of your birth date? (Ex. 8): ')
+
+    # To verify that the input is an integer
+    if Birth_Day.isdigit():
+        Birth_Day = int(Birth_Day)
+    
+        if Birth_Day < 1 or Birth_Day > 31:
+            print('Invalid response.')
+            return
+
+    #If user enters a string.
+    else:
+        print('Invalid response.')
+        return
+
+    Birth_Year = input('What is the year of your birth date? (1900-2024): ')
+
+    #To convert an input that is a digit to an integer.
+    if Birth_Year.isdigit():
+        Birth_Year = int(Birth_Year)
+
+    # Set paramaters for valid birth years.
+        if Birth_Year < 1900 or Birth_Year > 2024:
+            print('Invalid Response.')
+            return
+        
+        if Birth_Month == "February":
+            if Is_Leap_Year(Birth_Year):
+                1<= Birth_Day <= 29
+            else: 
+                1<= Birth_Day <= 28
+            
+        if Birth_Month == "February" and Birth_Day == 29 and Birth_Year == 1900:
+            print('Invalid response.')
+            return
+
+        if Birth_Day == 29 and not Is_Leap_Year(Birth_Year):
+            print('Invalid response.')
+            return
+
+        elif Birth_Month in ["January", "March", "May", "July", "August", "October", "December"]:
+            1 <= Birth_Day <= 31
+
+            if Birth_Day > 31:
+                print('Invalid response.')
+                return
+
+        elif Birth_Month in ["April", "June", "September", "November"]:
+            1 <= Birth_Day <= 30
+
+            if Birth_Day > 30:
+                print('Invalid response.')
+                return
+
+    #If the user entered a sring.    
+    else:
+        print('Invalid response.')
+        return
+
+    # Step 5) Verify the user is at least 18 years of age on the due date; 27th of September, 2024.    
+    Valid_Age = False
+
+    if Birth_Year < 2006:
+        Valid_Age = True
+    
+    elif Birth_Year == 2006:
+        if Birth_Month in ["January", "February", "March", "April", "May", "June", "July", "August"]:
+            Valid_Age = True
+    
+        elif Birth_Month == "September" and Birth_Day <= 27:
+            Valid_Age = True
+        
+        else:
+            Valid_Age = False
+
+    #Step 6: Verify all variables are valid and print eligibility to vote.        
+    if Valid_Residence and Valid_Citizenship and Valid_Age == True:
+        print('You are eligible to vote.')
+
+    else:
+        print('You are not eligible to vote.')
+        return
+    
+Voting_Eligibility ()
