@@ -2,17 +2,14 @@
 """
 { CPSC 231 - Assignment - 1 }
 
-Global Criterias:
+Global Criteria:
 - We are not permitted to import anything for this assignment
-
 - Invalid inputs must be indicated with "Invalid Input",
 followed by the program exiting.
-
 - Age is within the paramaters of 1900 - 2024
 - User must be 18 years of age from the date of the
 assignements due date (September 27th, 2024)
 - We must account for leap years.
-
 - User that inputs 'No', or 'no' for question 1 or 2, 
 they are not eligible to vote.
 
